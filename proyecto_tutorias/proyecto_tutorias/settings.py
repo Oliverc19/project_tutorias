@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
+    #app
     'tutorias',
-    'gestion_tutorias',
 ]
 
 MIDDLEWARE = [
@@ -91,15 +91,12 @@ WSGI_APPLICATION = "proyecto_tutorias.wsgi.application"
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db_tutorias',     
-        'USER': 'root',            
-        'PASSWORD': '12345', 
-        'HOST': '127.0.0.1',        
-        'PORT': '3306',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -123,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = "es-BO"
+LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
 
