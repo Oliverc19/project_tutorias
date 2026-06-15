@@ -20,7 +20,7 @@ def login_view(request):
         ) 
         if user is not None:
             auth_login(request, user)
-            return redirect('dashboard') # Asegúrate de que esta URL exista
+            return redirect('dashboard') 
         else:
             return render(request, 'registro/login.html', {'form': {'errors': True}})
             
@@ -373,9 +373,11 @@ def tutor_delete(request, pk):
 # ============================================
 @login_required
 def materia_list(request):
+    materias = Materia.objects.all()
     return render(
         request,
-        'gestion_tutorias/materia_list.html'
+        'gestion_tutorias/materia_list.html',
+        {'materias': materias}
     )
 @login_required
 def materia_create(request):
