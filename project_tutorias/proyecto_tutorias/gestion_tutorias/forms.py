@@ -12,17 +12,25 @@ class PersonaForm(forms.ModelForm):
         fields = ['ci', 'nombre', 'paterno', 'materno', 'email', 'rol']
 
 class EstudianteForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        ids_existentes = Estudiante.objects.values_list('persona__ci', flat=True)
+        self.fields['persona'].queryset = Persona.objects.filter(rol='EST').exclude(ci__in=ids_existentes)
     class Meta:
         model = Estudiante
-        fields = ['persona', 'carrera', 'codigo_estudiante']
+        fields = '__all__'
 
 class TutorForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        ids_existentes = Tutor.objects.values_list('persona__ci', flat=True)
+        self.fields['persona'].queryset = Persona.objects.filter(rol='TUT').exclude(ci__in=ids_existentes)
     class Meta:
         model = Tutor
-        fields = ['persona', 'especialidad', 'cubiculo']
-
+        fields = '__all__'
+        
 class TutoriaForm(forms.ModelForm):
     class Meta:
         model = Tutoria
-        fields = ['tutor', 'estudiante', 'materia', 'fecha_hora']
+        fields = ['tutor', 'estudiante', 'materia', 'fecha', 'estado']
 

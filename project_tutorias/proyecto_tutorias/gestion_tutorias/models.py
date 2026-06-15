@@ -18,6 +18,8 @@ class Estudiante(models.Model):
     )
     carrera = models.CharField(max_length=100)
     codigo_estudiante = models.CharField(max_length=20, unique=True)
+    def __str__(self):
+        return f"{self.persona} - {self.carrera} ({self.codigo_estudiante})"
 
 class Tutor(models.Model):
     persona = models.OneToOneField(
@@ -26,6 +28,8 @@ class Tutor(models.Model):
         primary_key=True
     )
     especialidad = models.CharField(max_length=100)
+    def __str__(self):
+        return f"{self.persona} - {self.especialidad}"
     class Meta:
         verbose_name = "Tutor"
         verbose_name_plural = "Tutores"
@@ -35,8 +39,6 @@ class Materia(models.Model):
 
     def __str__(self):
         return self.nombre
-
-from django.db import models
 
 class Tutoria(models.Model):
     ESTADOS = [

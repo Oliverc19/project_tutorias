@@ -1,0 +1,38 @@
+{% extends 'gestion_tutorias/base.html' %}
+
+{% block content %}
+
+<h2>Reporte de Tutorías por Estado</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Estado</th>
+        <th>Cantidad</th>
+    </tr>
+
+    <tr>
+        <td>Pendientes</td>
+        <td>{{ pendientes }}</td>
+    </tr>
+
+    <tr>
+        <td>Aceptadas</td>
+        <td>{{ aceptadas }}</td>
+    </tr>
+
+    <tr>
+        <td>Finalizadas</td>
+        <td>{{ finalizadas }}</td>
+    </tr>
+
+    <tr>
+        <td>Rechazadas</td>
+        <td>{{ rechazadas }}</td>
+    </tr>
+    <tr>
+    <th>Total Tutorías</th>
+    <th>{{ total }}</th>
+</tr>
+</table>
+
+{% endblock %}
