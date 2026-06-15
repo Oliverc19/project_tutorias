@@ -11,7 +11,7 @@ class Persona(models.Model):
         return f"{self.ci} - {self.nombre} {self.paterno} {self.materno} ({self.email})"
 
 class Estudiante(models.Model):
-    persona = models.OneToOneField(
+    persona = models.OneToOneField( 
         Persona, 
         on_delete=models.CASCADE, 
         primary_key=True
@@ -26,22 +26,38 @@ class Tutor(models.Model):
         primary_key=True
     )
     especialidad = models.CharField(max_length=100)
-    cubiculo = models.CharField(max_length=10)
-
+    class Meta:
+        verbose_name = "Tutor"
+        verbose_name_plural = "Tutores"
 class Materia(models.Model):
-    # Aquí Django creará automáticamente un campo 'id' autoincremental
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, unique=True)
 
     def __str__(self):
         return self.nombre
 
+from django.db import models
+
 class Tutoria(models.Model):
-    # Relacionamos la tutoría usando las llaves primarias de Tutor y Estudiante
-    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE)
-    estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
-    materia = models.ForeignKey(Materia, on_delete=models.CASCADE)
-    fecha_hora = models.DateTimeField()
+    ESTADOS = [
+        ('pendiente', 'Pendiente'),
+        ('aceptada', 'Aceptada'),
+        ('rechazada', 'Rechazada'),
+        ('finalizada', 'Finalizada'),
+    ]
+    tutor = models.ForeignKey('Tutor', on_delete=models.CASCADE)
+    estudiante = models.ForeignKey('Estudiante', on_delete=models.CASCADE)
+    materia = models.ForeignKey('Materia', on_delete=models.CASCADE)
+    fecha = models.DateTimeField()
+    estado = models.CharField(
+        max_length=20, 
+        choices=ESTADOS, 
+        default='pendiente'
+    )
+
+    class Meta:
+        verbose_name = "Tutoría"
+        verbose_name_plural = "Tutorías"
 
     def __str__(self):
-        return f"Tutoría de {self.materia.nombre} - {self.fecha_hora}"
+        return f"{self.materia} - {self.estado}"

@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block login_content %}
+
+<style>
+.login-fondo{
+    min-height: 100vh;
+
+    background-image:
+        linear-gradient(
+            rgba(0,0,0,0.4),
+            rgba(0,0,0,0.4)
+        ),
+        url("{% static 'gestion_tutorias/img/fondo.jpg' %}");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card{
+    width: 450px;
+}
+</style>
+
+<div class="login-fondo">
+
+    <div class="card shadow login-card">
+
+        <div class="card-header bg-primary text-white text-center py-3">
+            <h4 class="mb-0">
+                <i class="bi bi-person-circle"></i>
+                Iniciar Sesión
+            </h4>
+        </div>
+
+        <div class="card-body p-4">
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="id_username" class="form-label">
+                        Usuario
+                    </label>
+
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-person"></i>
+                        </span>
+
+                        <input
+                            type="text"
+                            name="username"
+                            class="form-control"
+                            id="id_username"
+                            placeholder="Ingrese su usuario"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_password" class="form-label">
+                        Contraseña
+                    </label>
+
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-key"></i>
+                        </span>
+
+                        <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            id="id_password"
+                            placeholder="Ingrese su contraseña"
+                            required
+                        >
+                    </div>
+                </div>
+
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    Usuario o contraseña incorrectos
+                </div>
+                {% endif %}
+
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100 py-2"
+                >
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    Ingresar
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="card-footer text-center text-muted">
+            Sistema de Gestión de Tutorías Académicas
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'gestion_tutorias/base.html' %}
+
+{% block title %}Personas{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-people"></i> Personas</h2>
+    <a href="{% url 'persona_create' %}" class="btn btn-primary">+ Nueva Persona</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr><th>CI</th><th>Nombre</th><th>Email</th><th>Rol</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+                {% for p in personas %}
+                <tr>
+                    <td>{{ p.ci }}</td>
+                    <td>{{ p.nombre }} {{ p.paterno }} {{ p.materno }}</td>
+                    <td>{{ p.email }}</td>
+                    <td><span class="badge bg-secondary">{{ p.rol }}</span></td>
+                    <td>
+                        <a href="{% url 'persona_edit' p.ci %}" class="btn btn-sm btn-warning">✏️</a>
+                        <a href="{% url 'persona_delete' p.ci %}" class="btn btn-sm btn-danger">🗑️</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5" class="text-center">No hay personas</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

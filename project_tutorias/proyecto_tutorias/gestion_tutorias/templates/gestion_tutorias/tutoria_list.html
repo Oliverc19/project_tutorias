@@ -1,0 +1,54 @@
+{% extends 'gestion_tutorias/base.html' %}
+
+{% block title %}Lista de Tutorías{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-calendar-check"></i> Tutorías</h2>
+    <a href="{% url 'tutoria_create' %}" class="btn btn-primary">+ Nueva Tutoría</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Tutor</th>
+                    <th>Estudiante</th>
+                    <th>Materia</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in tutorias %}
+                <tr>
+                    <td>{{ t.tutor.persona.nombre }} {{ t.tutor.persona.paterno }}</td>
+                    <td>{{ t.estudiante.persona.nombre }} {{ t.estudiante.persona.paterno }}</td>
+                    <td>{{ t.materia.nombre }}</td>
+                    <td>{{ t.fecha|date:"d/m/Y H:i" }}</td>
+                    <td>
+                        {% if t.estado == 'pendiente' %}
+                        <span class="badge bg-warning">Pendiente</span>
+                        {% elif t.estado == 'aceptada' %}
+                        <span class="badge bg-success">Aceptada</span>
+                        {% elif t.estado == 'rechazada' %}
+                        <span class="badge bg-danger">Rechazada</span>
+                        {% else %}
+                        <span class="badge bg-info">Finalizada</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'tutoria_edit' t.id %}" class="btn btn-sm btn-warning">✏️</a>
+                        <a href="{% url 'tutoria_delete' t.id %}" class="btn btn-sm btn-danger">🗑️</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6" class="text-center">No hay tutorías</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'gestion_tutorias/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2><i class="bi bi-speedometer2"></i> Dashboard</h2>
+<hr>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5>Personas</h5>
+                <h2>{{ total_personas }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5>Estudiantes</h5>
+                <h2>{{ total_estudiantes }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <h5>Tutores</h5>
+                <h2>{{ total_tutores }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-warning text-white">
+            <div class="card-body">
+                <h5>Materias</h5>
+                <h2>{{ total_materias }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header"><h5>Estado de Tutorías</h5></div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <h3>{{ tutorias_pendientes }}</h3>
+                        <span class="badge bg-warning">Pendientes</span>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>{{ tutorias_aceptadas }}</h3>
+                        <span class="badge bg-success">Aceptadas</span>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>{{ tutorias_finalizadas }}</h3>
+                        <span class="badge bg-info">Finalizadas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
