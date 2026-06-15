@@ -15,6 +15,7 @@
                 <tr><th>Código</th><th>Nombre</th><th>Acciones</th></tr>
             </thead>
             <tbody id="tabla-materias">
+<<<<<<< HEAD
                 {% for materia in materias %}
                 <tr>
                     <td>{{ materia.codigo }}</td>
@@ -27,8 +28,46 @@
                 {% empty %}
                 <tr><td colspan="3" class="text-center">No hay materias registradas.</td></tr>
                 {% endfor %}
+=======
+>>>>>>> b3342f674c46a8e4878c607de002bd0256026d41
             </tbody>
         </table>
     </div>
 </div>
+<<<<<<< HEAD
+=======
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    console.log("CARGANDO MATERIAS");
+
+    fetch('/api/materias/')
+    .then(response => response.json())
+    .then(data => {
+
+        console.log(data);
+
+        let tabla = document.getElementById('tabla-materias');
+        tabla.innerHTML = '';
+
+        data.forEach(m => {
+
+            tabla.innerHTML += `
+                <tr>
+                    <td>${m.codigo}</td>
+                    <td>${m.nombre}</td>
+                    <td>API REST</td>
+                </tr>
+            `;
+
+        });
+
+    });
+
+});
+</script>
+{% endblock %}
+
+{% block extra_js %}
+>>>>>>> b3342f674c46a8e4878c607de002bd0256026d41
 {% endblock %}

@@ -11,7 +11,7 @@ class Persona(models.Model):
         return f"{self.ci} - {self.nombre} {self.paterno} {self.materno} ({self.email})"
 
 class Estudiante(models.Model):
-    persona = models.OneToOneField(
+    persona = models.OneToOneField( 
         Persona, 
         on_delete=models.CASCADE, 
         primary_key=True
