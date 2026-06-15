@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login, logout
@@ -211,13 +210,6 @@ def reporte_tutorias_estado(request):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     permission_classes = [AllowAny]
-=======
-from rest_framework import viewsets
-from .serializers import MateriaSerializer
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
->>>>>>> b3342f674c46a8e4878c607de002bd0256026d41
 
 from .models import Persona, Estudiante, Tutor, Materia, Tutoria
 from .forms import PersonaForm, EstudianteForm, TutorForm, MateriaForm, TutoriaForm
@@ -226,7 +218,7 @@ from django.shortcuts import redirect
 
 def cerrar_sesion(request):
     logout(request)
-    return redirect('login')
+    return redirect('login_view')
 # ============================================
 # DASHBOARD
 # ============================================
@@ -242,7 +234,7 @@ def dashboard(request):
     tutorias_pendientes = Tutoria.objects.filter(estado='pendiente').count()
     tutorias_aceptadas = Tutoria.objects.filter(estado='aceptada').count()
     tutorias_finalizadas = Tutoria.objects.filter(estado='finalizada').count()
-    
+    tutorias_rechazadas = Tutoria.objects.filter(estado='rechazada').count()
     context = {
         'total_personas': total_personas,
         'total_estudiantes': total_estudiantes,
@@ -252,6 +244,7 @@ def dashboard(request):
         'tutorias_pendientes': tutorias_pendientes,
         'tutorias_aceptadas': tutorias_aceptadas,
         'tutorias_finalizadas': tutorias_finalizadas,
+        'tutorias_rechazadas': tutorias_rechazadas,
     }
     return render(request, 'gestion_tutorias/dashboard.html', context)
 
@@ -495,7 +488,6 @@ def reporte_tutorias_estado(request):
 class MateriaViewSet(viewsets.ModelViewSet):
     queryset = Materia.objects.all()
     serializer_class = MateriaSerializer
-<<<<<<< HEAD
     permission_classes = [permissions.IsAuthenticated]
 
 class TutoriaViewSet(viewsets.ModelViewSet):
@@ -507,39 +499,13 @@ class TutorViewSet(viewsets.ModelViewSet):
     queryset = Tutor.objects.all()
     serializer_class = TutorSerializer
     permission_classes = [permissions.IsAuthenticated]
-=======
-    
-    
-from .serializers import (
-    PersonaSerializer,
-    EstudianteSerializer,
-    TutorSerializer,
-    TutoriaSerializer
-)
-class PersonaViewSet(viewsets.ModelViewSet):
-    queryset = Persona.objects.all()
-    serializer_class = PersonaSerializer
-
->>>>>>> b3342f674c46a8e4878c607de002bd0256026d41
 
 class EstudianteViewSet(viewsets.ModelViewSet):
     queryset = Estudiante.objects.all()
     serializer_class = EstudianteSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-<<<<<<< HEAD
 class PersonaViewSet(viewsets.ModelViewSet):
     queryset = Persona.objects.all()
     serializer_class = PersonaSerializer
     permission_classes = [permissions.IsAuthenticated]
-=======
-
-class TutorViewSet(viewsets.ModelViewSet):
-    queryset = Tutor.objects.all()
-    serializer_class = TutorSerializer
-
-
-class TutoriaViewSet(viewsets.ModelViewSet):
-    queryset = Tutoria.objects.all()
-    serializer_class = TutoriaSerializer
->>>>>>> b3342f674c46a8e4878c607de002bd0256026d41

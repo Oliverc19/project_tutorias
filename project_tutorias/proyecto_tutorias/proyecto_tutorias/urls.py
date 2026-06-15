@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.urls import path, include
-<<<<<<< HEAD
 from django.shortcuts import redirect
 from django.views.generic import RedirectView
 from rest_framework.routers import DefaultRouter
@@ -14,14 +13,10 @@ router.register(r'personas', views.PersonaViewSet)
 router.register(r'estudiantes', views.EstudianteViewSet)
 router.register(r'tutores', views.TutorViewSet)
 router.register(r'tutorias', views.TutoriaViewSet)
-=======
-from django.contrib.auth import views as auth_views
->>>>>>> b3342f674c46a8e4878c607de002bd0256026d41
 
 urlpatterns = [
     # Administración
     path('admin/', admin.site.urls),
-<<<<<<< HEAD
     
     
     path('api/', include(router.urls)),
@@ -68,17 +63,3 @@ urlpatterns = [
     path('reportes/estado/', views.reporte_tutorias_estado, name='reporte_estado'),
 ]
 STATIC_URL = 'static/'
-=======
-    path('', include('gestion_tutorias.urls')),
-    path('login/', auth_views.LoginView.as_view(
-        template_name='registration/login.html'
-    ), name='login'),
-   path(
-    'logout/',
-    auth_views.LogoutView.as_view(next_page='/login/'),
-    name='logout'
-    ),
-    
-
-]
->>>>>>> b3342f674c46a8e4878c607de002bd0256026d41

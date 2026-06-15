@@ -21,16 +21,7 @@ class EstudianteForm(forms.ModelForm):
         self.fields['persona'].queryset = Persona.objects.filter(rol='EST').exclude(ci__in=ids_existentes)
     class Meta:
         model = Estudiante
-<<<<<<< HEAD
         fields = '__all__'
-=======
-        fields = ['persona', 'carrera', 'codigo_estudiante']
-        widgets = {
-            'persona': forms.Select(attrs={'class': 'form-select'}),
-            'carrera': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Carrera'}),
-            'codigo_estudiante': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Código'}),
-        }
->>>>>>> b3342f674c46a8e4878c607de002bd0256026d41
 
 class TutorForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -39,38 +30,18 @@ class TutorForm(forms.ModelForm):
         self.fields['persona'].queryset = Persona.objects.filter(rol='TUT').exclude(ci__in=ids_existentes)
     class Meta:
         model = Tutor
-<<<<<<< HEAD
         fields = '__all__'
         
-=======
-        fields = ['persona', 'especialidad']
-        widgets = {
-            'persona': forms.Select(attrs={'class': 'form-select'}),
-            'especialidad': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Especialidad'}),
-        }
-
-class MateriaForm(forms.ModelForm):
-    class Meta:
-        model = Materia
-        fields = ['nombre', 'codigo']
-        widgets = {
-            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre de la Materia'}),
-            'codigo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Código'}),
-        }
-
->>>>>>> b3342f674c46a8e4878c607de002bd0256026d41
 class TutoriaForm(forms.ModelForm):
     class Meta:
         model = Tutoria
         fields = ['tutor', 'estudiante', 'materia', 'fecha', 'estado']
-<<<<<<< HEAD
-
-=======
+class MateriaForm(forms.ModelForm):
+    class Meta:
+        model = Materia
+        fields = ['nombre', 'codigo'] 
         widgets = {
-            'tutor': forms.Select(attrs={'class': 'form-select'}),
-            'estudiante': forms.Select(attrs={'class': 'form-select'}),
-            'materia': forms.Select(attrs={'class': 'form-select'}),
-            'fecha': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
-            'estado': forms.Select(attrs={'class': 'form-select'}),
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'codigo': forms.TextInput(attrs={'class': 'form-control'}),
         }
->>>>>>> b3342f674c46a8e4878c607de002bd0256026d41
+
